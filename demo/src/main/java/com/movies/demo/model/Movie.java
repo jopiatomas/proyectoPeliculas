@@ -30,6 +30,8 @@ public class Movie {
 
     private String genero;
 
+    public Movie() {
+    }
 
     public Movie(String title, String director, int anioLanzamiento, String genero) {
         this.title = title;

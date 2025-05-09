@@ -2,10 +2,10 @@ package com.movies.demo.service;
 
 import com.movies.demo.model.Movie;
 import com.movies.demo.repository.MovieRepository;
+import com.movies.demo.validations.MovieValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,19 +14,13 @@ public class MovieService {
 
     @Autowired // usar Autowired o no?
     private MovieRepository movieRepository;
-
+    @Autowired
+    private MovieValidator movieValidator;
 
     public Optional<Movie> saveMovie(Movie movie){
 
-        Optional<Movie> movieOptional = movieRepository
-                .findMovieByTitleAndDirector(movie.getTitle(), movie.getDirector());
-        if(movieOptional.isPresent()){
-            throw new IllegalStateException("Movie already exists.");
-        }
+        movieValidator.validarParaCreacion(movie);
 
-        if(movie.getAnioLanzamiento() < 1920 && movie.getGenero().equalsIgnoreCase("documental")){
-            return Optional.empty();
-        }
 
         return Optional.of(movieRepository.save(movie));
     }

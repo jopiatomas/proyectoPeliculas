@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/movies")
@@ -16,14 +17,18 @@ public class MovieController {
     @Autowired
     private MovieService movieService;
 
+
     @PostMapping
-    public ResponseEntity<?> crearPelicula(@Valid @RequestBody Movie movie){
-        // no entiendo absolutamente nada de esta función en el archivo "Arquitectura MVC"
+    public ResponseEntity<?> save(@Valid @RequestBody Movie movie) {
+        Optional<Movie> movieAux = movieService.saveMovie(movie);
+
+        return ResponseEntity.ok(movieAux);
     }
 
 
     @GetMapping
     public List<Movie> listarTodasLasPeliculas(){
+        System.out.println("listando las peliculas");
         return movieService.getAllMovies();
     }
 
