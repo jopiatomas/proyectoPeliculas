@@ -28,7 +28,6 @@ public class MovieController {
 
     @GetMapping
     public List<Movie> listarTodasLasPeliculas(){
-        System.out.println("listando las peliculas");
         return movieService.getAllMovies();
     }
 

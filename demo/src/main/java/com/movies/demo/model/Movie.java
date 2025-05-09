@@ -18,7 +18,7 @@ public class Movie {
     private Long id;
 
     @NotBlank
-    @Size(min = 2, max = 100)
+    @Size(min = 2, max = 100, message = "El titulo es necesario.")
     private String title;
 
     @NotBlank
